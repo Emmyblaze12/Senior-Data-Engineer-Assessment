@@ -1,7 +1,13 @@
 -- ===================================
 -- Task 2
 -- SCD Type 2 Asset Register
+-- SCD Type 2 Design:
+-- Maintains full history of asset changes by versioning records
+-- Only one active record per AssetID at any time (IsCurrent = 1)
 -- ===================================
+
+-- Recommended: Wrap this logic in a stored procedure with transaction control
+-- to ensure atomic SCD processing
 
 -- Create Dimension Table
 
@@ -52,6 +58,8 @@ LEFT JOIN dbo.DimAsset d
 WHERE d.AssetID IS NULL;
 
 -- Expire Existing Records
+-- Expire current record if any attribute changes
+
 
 UPDATE d
 SET
@@ -72,6 +80,7 @@ AND (
         ISNULL(s.Location,'')
     );
 -- Insert New Versions
+-- Insert new version after expiry of changed records
 
 INSERT INTO dbo.DimAsset
 (
@@ -100,7 +109,7 @@ AND NOT EXISTS (
     FROM dbo.DimAsset x
     WHERE x.AssetID = s.AssetID
     AND x.IsCurrent = 1
-)
+);
 
 ## Data Quality Controls
 
