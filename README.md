@@ -69,3 +69,11 @@ Demonstrates deployment automation through a REST API using PowerShell.
 - Authentication integrated with Active Directory
 - AssetID serves as business key
 - REST API endpoint exposed by BI platform
+
+```mermaid
+flowchart LR
+
+A[Raw Staging] --> B[SCD Type 2 Process]
+B --> C[DimAsset]
+C --> D[Power BI]
+```
