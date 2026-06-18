@@ -1,10 +1,9 @@
 # =====================================
-# Task 3
-# Deployment Automation
+# Task 3 - Deployment Automation
 # =====================================
 
 $BaseUrl = "https://bi.eimmyc.com/api"
-$Token = "TOKEN"
+$Token = $env:BI_API_TOKEN
 
 $Headers = @{
     Authorization = "Bearer $Token"
@@ -17,20 +16,23 @@ $Payload = @{
     Overwrite = $true
 } | ConvertTo-Json
 
+try {
+    $response = Invoke-RestMethod `
+        -Uri "$BaseUrl/deployment/promote" `
+        -Method POST `
+        -Headers $Headers `
+        -Body $Payload
+
+    if ($response.status -eq "Success") {
+        Write-Host "Deployment successful"
+    }
+}
+catch {
+    Write-Host "Deployment failed: $($_.Exception.Message)"
+}
+
+# Refresh configuration
 Invoke-RestMethod `
-    -Uri "$BaseUrl/deployment/promote" `
+    -Uri "$BaseUrl/configuration/refresh" `
     -Method POST `
-    -Headers $Headers `
-    -Body $Payload
-
-Write-Host "Deployment completed."
-
-## Deployment Workflow
-
-1. Authenticate using service principal credentials.
-2. Retrieve artefact metadata.
-3. Validate target environment.
-4. Promote artefacts from Dev to Test.
-5. Execute post-deployment validation.
-6. Refresh datasets.
-7. Log deployment results.
+    -Headers $Headers
