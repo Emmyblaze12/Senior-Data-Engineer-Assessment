@@ -3,7 +3,7 @@
 # Deployment Automation
 # =====================================
 
-$BaseUrl = "https://bi.company.com/api"
+$BaseUrl = "https://bi.eimmyc.com/api"
 $Token = "TOKEN"
 
 $Headers = @{
@@ -22,3 +22,5 @@ Invoke-RestMethod `
     -Method POST `
     -Headers $Headers `
     -Body $Payload
+
+Write-Host "Deployment completed."
