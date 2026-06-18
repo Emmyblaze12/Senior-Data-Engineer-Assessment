@@ -1,6 +1,6 @@
 # Senior-Data-Engineer-Assessment
 Technical Screening Assessment for Senior Data Engineer (Power BI Contract)
-## Candidate
+## Name
 Emmanuel Ajagba
 
 ## Overview
