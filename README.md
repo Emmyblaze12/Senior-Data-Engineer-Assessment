@@ -3,6 +3,21 @@ Technical Screening Assessment for Senior Data Engineer (Power BI Contract)
 ## Name
 Emmanuel Ajagba
 
+## About Me
+
+I am a Data Engineer with experience building and supporting enterprise data solutions across banking and FMCG environments.
+
+My experience includes:
+
+- Oracle and SQL Server development
+- ETL pipeline design and optimization
+- SAP data integration
+- Power BI, SSRS and business intelligence reporting
+- Data warehouse design and dimensional modelling
+- SQL performance tuning and automation
+
+This assessment demonstrates my approach to security, data warehousing and deployment automation.
+
 ## Overview
 
 This repository contains my solutions to the mandatory technical screening assessment.
