@@ -34,3 +34,10 @@ LOOKUPVALUE() finds the EmployeeKey associated with that email.
 PATHCONTAINS() evaluates whether the manager exists within the employee hierarchy path.
 
 This grants visibility to all descendants in the hierarchy while preserving security.
+
+
+## Practical Considerations
+
+In enterprise environments, USERPRINCIPALNAME() must match the format stored in EmployeeEmail.
+
+For on-premises Active Directory integrations, I would validate naming conventions during implementation to prevent RLS failures caused by mismatched login identities.
