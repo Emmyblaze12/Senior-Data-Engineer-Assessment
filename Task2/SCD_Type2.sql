@@ -95,14 +95,20 @@ FROM dbo.StgAsset s
 JOIN dbo.DimAsset d
     ON s.AssetID = d.AssetID
 WHERE d.IsCurrent = 0
-AND d.EffectiveTo >= DATEADD(MINUTE,-1,SYSUTCDATETIME());
+AND NOT EXISTS (
+    SELECT 1
+    FROM dbo.DimAsset x
+    WHERE x.AssetID = s.AssetID
+    AND x.IsCurrent = 1
+)
 
 ## Data Quality Controls
 
-Before loading data into the dimension table I would typically:
+/*Before loading data into the dimension table I would typically:
 
 1. Validate business keys.
 2. Remove duplicate records.
 3. Check mandatory fields.
 4. Audit row counts.
 5. Log rejected records.
+*/
