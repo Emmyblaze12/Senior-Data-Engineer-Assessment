@@ -96,3 +96,13 @@ JOIN dbo.DimAsset d
     ON s.AssetID = d.AssetID
 WHERE d.IsCurrent = 0
 AND d.EffectiveTo >= DATEADD(MINUTE,-1,SYSUTCDATETIME());
+
+## Data Quality Controls
+
+Before loading data into the dimension table I would typically:
+
+1. Validate business keys.
+2. Remove duplicate records.
+3. Check mandatory fields.
+4. Audit row counts.
+5. Log rejected records.
